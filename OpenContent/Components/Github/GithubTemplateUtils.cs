@@ -59,15 +59,9 @@ namespace Satrabel.OpenContent.Components
                 client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
                 var response = client.GetStringAsync(new Uri(url)).Result;
                 if (response != null)
-                {                 
-                    // Parse the response and add the contents
-                    var allContents = Contents.FromJson(response);
-
-                    // Filter the .github folder
-                    var filteredContents = allContents.Where(content => !content.Name.Equals(".github", StringComparison.OrdinalIgnoreCase)).ToList();
-                    
+                {
                     //content = JArray.Parse(response);
-                    contents.AddRange(filteredContents);
+                    contents .AddRange(Contents.FromJson(response));
                 }
             }
             return contents;
